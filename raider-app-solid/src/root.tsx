@@ -22,13 +22,9 @@ export default function Root() {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body>
+      <Body class="px-8 py-12 md:px-48 flex flex-col h-full bg-slate-800 text-slate-100 min-h-screen">
         <Suspense>
           <ErrorBoundary>
-            <A class="mr-2" href="/">
-              Index
-            </A>
-            <A href="/about">About</A>
             <Routes>
               <FileRoutes />
             </Routes>
