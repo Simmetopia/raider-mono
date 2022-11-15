@@ -1,5 +1,4 @@
 defmodule LetsRaidWeb.Api.PlayerSessionJSON do
-  alias LetsRaid.Players.Player
 
   @doc """
   Renders a list of player_roles.
@@ -15,10 +14,11 @@ defmodule LetsRaidWeb.Api.PlayerSessionJSON do
     %{data: data(player)}
   end
 
-  defp data(%Player{} = player_role) do
+  defp data(player_role) do
     %{
       id: player_role.id,
-      email: player_role.email
+      email: player_role.email, 
+      token: Map.get(player_role, :token)
     }
   end
 end

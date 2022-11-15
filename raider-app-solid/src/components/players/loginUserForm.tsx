@@ -1,5 +1,6 @@
 import { createRouteAction } from "solid-start";
 import { server_response, player } from "~/routes/players";
+import { token, setToken } from "~/components/players/createUserForm"
 
 export const LoginUserForm = () => {
   const [user_login, { Form: FormLogin }] = createRouteAction(
@@ -12,6 +13,8 @@ export const LoginUserForm = () => {
       }
 
       const json = (await res.json()) as server_response<player>;
+      setToken(json.data.token)
+      sessionStorage.setItem("token", json.data.token)
       return json.data;
     }
   );
@@ -19,7 +22,11 @@ export const LoginUserForm = () => {
     <>
       <h3 class="text-xl"> login </h3>
       {!user_login.error && user_login.result && (
-        <div> You looged in {user_login.result.email}</div>
+        <>
+          <div> You looged in {user_login.result.email}</div>
+
+          <div> and thine token is {token} </div>
+        </>
       )}
       <FormLogin class="flex flex-col gap-3 items-start">
         <label for="email">Username:</label>

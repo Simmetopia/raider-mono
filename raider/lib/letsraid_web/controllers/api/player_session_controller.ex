@@ -6,10 +6,11 @@ defmodule LetsRaidWeb.Api.PlayerSessionController do
 
   def create(conn, player_params) do
     with {:ok, %Players.Player{} = player} <- Players.register_player(player_params) do
+        {:ok, token, _claims} = LetsRaid.Guardian.encode_and_sign(player)
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/session/#{player}")
-      |> render(:show, player: player)
+      |> render(:show, player: player |> Map.put(:token, token))
     end
   end
 
@@ -19,7 +20,8 @@ defmodule LetsRaidWeb.Api.PlayerSessionController do
         {:error, :not_found}
 
       player ->
-        render(conn, :show, player: player)
+        {:ok, token, _claims} = LetsRaid.Guardian.encode_and_sign(player)
+        render(conn, :show, player: player |> Map.put(:token, token))
     end
   end
 

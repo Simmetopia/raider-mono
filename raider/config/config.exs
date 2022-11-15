@@ -21,6 +21,10 @@ config :letsraid, LetsRaidWeb.Endpoint,
   pubsub_server: LetsRaid.PubSub,
   live_view: [signing_salt: "vCeH+THk"]
 
+config :letsraid, LetsRaid.Guardian,
+  issuer: "lets_raid",
+  secret_key: "5gtgko0hNZ3WT1kcUG0kD1emFl+IxJHkPkmoBQYSQA/u/nqSHvY10M2UVOWykWWL"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

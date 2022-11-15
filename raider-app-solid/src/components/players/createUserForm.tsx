@@ -1,5 +1,8 @@
+import { createSignal } from "solid-js";
 import { createRouteAction } from "solid-start";
 import { server_response, player } from "~/routes/players";
+
+export const [token, setToken] = createSignal<string | undefined>();
 
 export const CreateUserForm = () => {
   const [_, { Form }] = createRouteAction(async (formData: FormData) => {
@@ -9,8 +12,10 @@ export const CreateUserForm = () => {
       body: formData,
     });
     const json = (await res.json()) as server_response<player>;
+    setToken(json.data.token)
     return json.data;
   });
+
 
   return (
     <>

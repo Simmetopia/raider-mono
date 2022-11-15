@@ -18,6 +18,11 @@ defmodule LetsRaidWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug :accepts, ["json"]
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   scope "/", LetsRaidWeb do
     pipe_through :browser
 
@@ -26,8 +31,9 @@ defmodule LetsRaidWeb.Router do
 
   scope "/api", LetsRaidWeb do
     pipe_through :api
-    resources "/roles", RoleController, except: [:new, :edit]
     resources "/session", Api.PlayerSessionController, except: [:new, :edit]
+    pipe_through :api_auth
+    resources "/roles", RoleController, except: [:new, :edit]
     resources "/player_roles", PlayerRoleController, except: [:new, :edit]
   end
 

@@ -7,6 +7,7 @@ import { LoginUserForm } from "~/components/players/loginUserForm";
 export type player = {
   email: string;
   id: number;
+  token?: string;
 };
 
 export type server_response<T> = {
