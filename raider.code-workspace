@@ -1,11 +1,14 @@
 {
   "folders": [
-	{
-		"path": "raider"
-	},
-	{
-		"path": "raider-app-solid"
-	}
-],
+    {
+      "path": "raider"
+    },
+    {
+      "path": "raider-app-solid"
+    },
+    {
+      "path": "raider-app-qwik"
+    }
+  ],
   "settings": {}
 }
